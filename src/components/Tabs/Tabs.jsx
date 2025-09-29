@@ -1,4 +1,4 @@
-export const Tabs = ({ tabs, activeTab, onTabSelected }) => {
+export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
   return (
     <div data-cy="TabsComponent">
       <div className="tabs is-boxed">
@@ -7,12 +7,12 @@ export const Tabs = ({ tabs, activeTab, onTabSelected }) => {
             <li
               key={tab.id}
               data-key={tab.id}
-              className={tab.id === activeTab.id ? 'is-active' : ''}
+              className={tab.id === activeTabId ? 'is-active' : ''}
               data-cy="Tab"
               onClick={event => {
                 const tabId = event.currentTarget.dataset.key;
 
-                if (tabId !== activeTab.id) {
+                if (tabId !== activeTabId) {
                   onTabSelected(tabId);
                 }
               }}
@@ -26,7 +26,7 @@ export const Tabs = ({ tabs, activeTab, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {tabs.find(tab => tab.id === activeTab.id)?.content}
+        {tabs.find(tab => tab.id === activeTabId)?.content}
       </div>
     </div>
   );
