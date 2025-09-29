@@ -1,7 +1,5 @@
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
-  // const getTargetsValue = event => {
-  //   return event.target.dataset.key;
-  // };
+  const activeTab = tabs.find(t => t.id === activeTabId) || tabs[0];
 
   return (
     <div className="section">
@@ -16,12 +14,12 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
               <li
                 key={tab.id}
                 data-key={tab.id}
-                className={tab.id === activeTabId ? 'is-active' : ''}
+                className={tab.id === activeTab.id ? 'is-active' : ''}
                 data-cy="Tab"
                 onClick={event => {
                   const tabId = event.currentTarget.dataset.key;
 
-                  if (tabId !== activeTabId) {
+                  if (tabId !== activeTab.id) {
                     onTabSelected(tabId);
                   }
                 }}
@@ -35,7 +33,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
         </div>
 
         <div className="block" data-cy="TabContent">
-          {tabs.find(tab => tab.id === activeTabId)?.content}
+          {tabs.find(tab => tab.id === activeTab.id)?.content}
         </div>
       </div>
     </div>
